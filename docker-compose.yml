@@ -1,0 +1,31 @@
+version: '3'
+services:
+    gitlab:
+        image: gitlab/gitlab-ce:latest
+        ports:
+        - "30080:30080"
+        - "30022:22"
+        environment:
+           GITLAB_OMNIBUS_CONFIG: "external_url 'http://gitlab.local.dc:30080'; gitlab_rails['gitlab_shell_ssh_port']=30022;"
+        volumes:
+        - gitlab-ce-config:/etc/gitlab:Z
+        - gitlab-ce-logs:/etc/gitlab:Z
+        - gitlab-ce-data:/etc/gitlab:Z
+
+        #        - /srv/gitlab/config:/etc/gitlab:Z
+        #        - /srv/gitlab/logs:/var/log/gitlab:Z
+        #        - /srv/gitlab/data:/var/opt/gitlab:Z
+        #    postgres:
+        #        image: postgres:9.6-alpine
+        #        env_file: postgres.env
+        #        volumes:
+        #        - netbox-postgres-data:/var/lib/postgresql/data
+
+volumes:
+    gitlab-ce-config:
+        driver: local
+    gitlab-ce-logs:
+        driver: local
+    gitlab-ce-data:
+        driver: local
+~
