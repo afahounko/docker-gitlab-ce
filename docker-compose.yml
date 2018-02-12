@@ -2,6 +2,7 @@ version: '3'
 services:
     gitlab:
         image: gitlab/gitlab-ce:latest
+        restart: always
         container_name: gitlab-ce
         ports:
         - "30080:30080"
@@ -18,6 +19,7 @@ services:
         #- /srv/gitlab/data:/var/opt/gitlab:Z
     gitlab-runner:
         image: gitlab/gitlab-runner:latest
+        restart: always
         container_name: gitlab-runner
         volumes:
         - /var/run/docker.sock:/var/run/docker.sock:Z
